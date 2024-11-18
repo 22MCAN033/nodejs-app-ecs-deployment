@@ -6,10 +6,9 @@ phases:
       nodejs: 12
     commands:
       - echo "Installing AWS CLI..."
-      - curl "https://d1wnz8q5q6g0y1.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
       - unzip awscliv2.zip
       - sudo ./aws/install
-      - aws --version  # Verify installation
 
   pre_build:
     commands:
