@@ -5,10 +5,16 @@ phases:
     runtime-versions:
       nodejs: 12
     commands:
+      - echo "Updating package lists..."
+      - apt-get update
+      - echo "Installing unzip..."
+      - apt-get install -y unzip
       - echo "Installing AWS CLI..."
       - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
       - unzip awscliv2.zip
-      - sudo ./aws/install
+      - echo "Running AWS CLI installer..."
+      - ./aws/install || { echo 'AWS CLI installation failed'; exit 1; }
+      - aws --version  # Verify installation
 
   pre_build:
     commands:
