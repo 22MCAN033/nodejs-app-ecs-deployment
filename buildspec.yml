@@ -4,20 +4,30 @@ phases:
   install:
     runtime-versions:
       nodejs: 12
+    commands:
+      - echo "Installing AWS CLI..."
+      - curl "https://d1wnz8q5q6g0y1.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      - unzip awscliv2.zip
+      - sudo ./aws/install
+      - aws --version  # Verify installation
+
   pre_build:
     commands:
-      - echo Logging in to Amazon ECR...
+      - echo "Logging in to Amazon ECR..."
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 390402554944.dkr.ecr.us-east-1.amazonaws.com
       - REPOSITORY_URI=public.ecr.aws/r5p1i5g3/tet-repo:latest
       - IMAGE_TAG=${CODEBUILD_RESOLVED_SOURCE_VERSION}
+
   build:
     commands:
-      - echo Building the Docker image...
+      - echo "Building the Docker image..."
       - docker build -t $REPOSITORY_URI:latest .
+
   post_build:
     commands:
-      - echo Pushing the Docker image...
+      - echo "Pushing the Docker image..."
       - docker push $REPOSITORY_URI:latest
+
 artifacts:
   files:
     - '**/*'
