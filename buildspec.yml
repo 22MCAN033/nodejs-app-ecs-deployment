@@ -8,7 +8,7 @@ phases:
       - echo "Updating package lists..."
       - apt-get update
       - echo "Installing unzip..."
-      - apt-get install -y unzip
+      - yum install -y unzip
       - echo "Installing AWS CLI..."
       - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
       - unzip awscliv2.zip
