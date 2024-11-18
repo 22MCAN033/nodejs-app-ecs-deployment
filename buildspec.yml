@@ -7,14 +7,9 @@ phases:
     commands:
       - echo "Updating package lists..."
       -  yum update -y
-      - echo "Installing unzip..."
-      - yum install -y unzip
-      - echo "Installing AWS CLI..."
-      - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-      - unzip awscliv2.zip
-      - echo "Running AWS CLI installer..."
-      - ./aws/install || { echo 'AWS CLI installation failed'; exit 1; }
-      - aws --version  # Verify installation
+      - sudo yum install awscli
+      - sudo yum update awscli
+      
 
   pre_build:
     commands:
