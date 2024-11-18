@@ -6,7 +6,7 @@ phases:
       nodejs: 12
     commands:
       - echo "Updating package lists..."
-      - apt-get update
+      -  yum update -y
       - echo "Installing unzip..."
       - yum install -y unzip
       - echo "Installing AWS CLI..."
